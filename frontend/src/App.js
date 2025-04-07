@@ -18,6 +18,32 @@ function App() {
           setToken("");
           localStorage.removeItem("token");
         });
+
+
+        const getUserData = async () => {
+          try {
+            const response = await api.get("/user/me",{ 
+              headers: {
+                Authorization: `Bearer ${token}`, // Ajout de l'en-tête Authorization avec le token
+              },
+            });
+            console.log("Réponse de l'API :", response);
+            if (response.data) {
+              console.log("Données de l'utilisateur :", response.data);
+              setUser(response.data);
+            } else {
+              console.error("Erreur : données de l'utilisateur non disponibles");
+              setUser(null); 
+            }
+          } catch (error) {
+            console.error("Erreur lors de la récupération des données de l'utilisateur :", error);
+            setUser(null);
+          }
+        };
+  
+        getUserData();
+
+
     }
   }, [token]);
 
@@ -40,12 +66,12 @@ function App() {
       <div className="auth-form"> {/* Style coloré similaire */}
         <h1>Mes Produits</h1>                
         <button onClick={logout} className="auth-button">Déconnexion</button> 
-
+        
         <div className="profil-zone">
                     {user ? (
                       <div>
-                        <h2>{user.profileName}</h2>
-                        
+                        <h2>{user.fullName}</h2>
+                        <p>Téléphone : {user.phone}</p>
                       </div>
                     ) : (
                       <p>Erreur : données de l'utilisateur non disponibles</p>

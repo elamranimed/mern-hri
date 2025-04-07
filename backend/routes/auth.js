@@ -63,27 +63,5 @@ router.post("/login", async (req, res) => {
 });
 
 // Récupérer les infos de l'utilisateur connecté
-router.get("/me", auth, async (req, res) => {
-  try {
-    const user = await User.findById(req.user.id).select("-password");
-    if (!user) {
-      return res.status(404).json({ message: "Utilisateur non trouvé" });
-    }
-    res.json({
-      fullName: user.fullName,
-      phone: user.phone,
-      
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Erreur serveur" });
-  }
-});
-
-
-
-
-
-
 
 module.exports = router;

@@ -24,10 +24,14 @@ mongoose
   .catch(err => console.error('Erreur MongoDB:', err));
 
 // Ajouter les routes
+const authRoutes = require('./routes/auth');  // Auth et gestion utilisateur dans le même fichier
 const produitRoutes = require("./routes/produits");
-const authRoutes = require('./routes/auth');
-app.use('/api/auth', authRoutes);
+const userRoutes = require("./routes/users");
+
+
+app.use('/api/auth', authRoutes); 
 app.use("/api/produits", produitRoutes);
+app.use("/api/user", userRoutes);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Serveur démarré sur le port ${PORT}`));

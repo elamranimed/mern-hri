@@ -11,7 +11,11 @@ const AuthForm = ({ setToken }) => {
   // reccuperer donnes profil a afficher apres connexion
   const getProfile = async () => {
     try {
-      const res = await api.get('/user');
+      const res = await api.get('api/user/me', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       setProfileName(res.data.profileName);
     } catch (err) {
       console.error(err);
@@ -23,7 +27,7 @@ const AuthForm = ({ setToken }) => {
     e.preventDefault(); // Empêche le comportement par défaut de rechargement de la page
     try {
       const endpoint = isLogin ? "/auth/login" : "/auth/register"; // Endpoint API choisi en fonction du mode actuel
-      const res = await api.post(endpoint, { phone, password }); // Envoi des données via une requête POST
+      const res = await api.post(endpoint, { phone, password ,fullName: profileName}); // Envoi des données via une requête POST
       if (isLogin) {
         setToken(res.data.token); // Stocke le token de l'utilisateur après une connexion réussie
         localStorage.setItem("token", res.data.token); // Sauvegarde le token dans le stockage local

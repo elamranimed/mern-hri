@@ -8,4 +8,4 @@ const userSchema = new mongoose.Schema({
   
 });
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("User", userSchema,"users"); // utilisation troisieme parametre pour forcer a utiliser users (ou autre) dans mangoo et non user

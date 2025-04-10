@@ -1,5 +1,6 @@
 import React, { useState } from "react"; // Import des hooks React pour gérer les états locaux
 import api from "../axiosConfig"; // Importation de la configuration Axios pour effectuer les requêtes API
+import ProductShowcase from "./ProductShowcase";
 
 // Composant AuthForm pour gérer le processus d'authentification
 const AuthForm = ({ setToken }) => {
@@ -82,6 +83,14 @@ const AuthForm = ({ setToken }) => {
           ? "Pas de compte ? Inscrivez-vous" 
           : "Déjà un compte ? Connectez-vous"}
       </button>
+
+            {/* Ajout du composant ProductShowcase */}
+        <div className="product-showcase-container">
+          <h3>Produits publics disponibles :</h3>
+          <ProductShowcase />
+        </div>
+
+
     </div>
   );
 };

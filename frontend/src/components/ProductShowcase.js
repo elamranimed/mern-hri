@@ -26,7 +26,7 @@ const ProductShowcase = () => {
         <li key={produit._id} className="product-item">
             <strong>{produit.title}</strong>
             <p>Ajouté par : {produit.user?.fullName || 'Utilisateur inconnu'}</p>
-            <p>Numéro de téléphone : {produit.user?._id || 'Non disponible'}</p>
+            <p>Numéro de téléphone : {produit.user?.phone || 'Non disponible'}</p>
         </li>
         ))}
 

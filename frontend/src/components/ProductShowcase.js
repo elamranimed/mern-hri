@@ -8,6 +8,7 @@ const ProductShowcase = () => {
     const fetchProduits = async () => {
       try {
         const res = await api.get('/produits/public'); // Appelle la route publique
+        console.log(res.data); // AFFICHER LES DONNÉES DANS LA CONSOLE 
         setProduits(res.data); // Stocke les produits dans l'état local
       } catch (err) {
         console.error('Erreur lors de la récupération des produits :', err);
@@ -25,7 +26,7 @@ const ProductShowcase = () => {
             {produits.map((produit) => (
         <li key={produit._id} className="product-item">
             <strong>{produit.title}</strong>
-            <p>Ajouté par : {produit.user?.fullName || 'Utilisateur inconnu'}</p>
+            <p>Ajouté par : {produit.user?.fullName || 'Vendeur inconnu'}</p>
             <p>Numéro de téléphone : {produit.user?.phone || 'Non disponible'}</p>
         </li>
         ))}

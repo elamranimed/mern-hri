@@ -45,7 +45,7 @@ router.delete('/:id', auth, async (req, res) => {
 // Récupérer tous les produits enregistrés (route publique)
 router.get('/public', async (req, res) => {
   try {
-    const products = await Product.find().populate('user', 'fullName'); // Populer pour afficher le nom complet de l'utilisateur, si besoin
+    const products = await Product.find().populate('user', 'fullName phone'); // Populer pour afficher le nom complet de l'utilisateur et Tel, si besoin
     res.json(products);
   } catch (err) {
     console.error('Erreur serveur :', err);

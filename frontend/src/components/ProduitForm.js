@@ -15,7 +15,7 @@ const ProduitForm = ({ setProduits }) => {
             alert("Erreur lors de l’ajout du produit"); 
         } 
     }; 
-
+    
     return ( 
         <form onSubmit={handleSubmit} className="produit-form"> 
             <input 

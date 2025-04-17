@@ -25,6 +25,7 @@ const ProductShowcase = () => {
         
             {produits.map((produit) => (
         <li key={produit._id} className="product-item">
+            <img src={`http://localhost:3000/${produit.image}`} alt={produit.title} style={{ width: '100px', height: '100px' }} />
             <strong>{produit.title}</strong>
             <p>Ajouté par : {produit.user?.fullName || 'Vendeur inconnu'}</p>
             <p>Numéro de téléphone : {produit.user?.phone || 'Non disponible'}</p>

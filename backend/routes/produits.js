@@ -2,6 +2,18 @@ const express = require('express');
 const router = express.Router();
 const Product = require('../models/produit');
 const auth = require('../middleware/auth');
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './uploads/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + '-' + file.originalname);
+  }
+});
+
+const upload = multer({ storage: storage });
 
 // Récupérer les produits de l'utilisateur connecté
 router.get('/', auth, async (req, res) => {
@@ -15,9 +27,13 @@ router.get('/', auth, async (req, res) => {
 });
 
 // Ajouter un produit
-router.post('/', auth, async (req, res) => {
+router.post('/', auth, upload.single('image'), async (req, res) => {
   try {
-    const product = new Product({ title: req.body.title, user: req.user.id });
+    if (!req.file) {
+      return res.status(400).json({ message: 'Aucune image fournie' });
+    }
+
+    const product = new Product({ title: req.body.title, image: req.file.path , user: req.user.id });
     await product.save();
     res.json(product);
   } catch (err) {

@@ -20,22 +20,17 @@ const ProductShowcase = () => {
 
   return (
     <div className="product-showcase">
-      <h2>Produits disponibles</h2>
-               <div className="product-grid">
-
-            {produits.map((produit) => (
-              <div key={produit._id} className="product-item">
-                
-              <img src={`http://localhost:3000/${produit.image}`} alt={produit.title} style={{ width: '100px', height: '100px' }} />
-              <strong>{produit.title}</strong>
-              <p>Ajouté par : {produit.user?.fullName || 'Vendeur inconnu'}</p>
-              <p>Numéro de téléphone : {produit.user?.phone || 'Non disponible'}</p>
-
-              </div>
-
-            ))}
+      <h2>Produits disponibles</h2>     
+      <div className="product-grid">
+        {produits.map((produit) => (
+          <div key={produit._id} className="product-item">
+            <img src={`http://localhost:3000/${produit.image}`} alt={produit.title} style={{ width: '100px', height: '100px' }} />
+            <strong>{produit.title}</strong>
+            <p>Ajouté par : {produit.user?.fullName || 'Vendeur inconnu'}</p>
+            <p>Numéro de téléphone : {produit.user?.phone || 'Non disponible'}</p>
           </div>
-
+        ))}
+      </div>
     </div>
   );
 };
